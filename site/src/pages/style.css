@@ -195,14 +195,14 @@ Login
 }
 
 /*enviar-livro*/
-.container {
-    display: flex;
-    flex-direction: column;
+.colored-container {
 
     width: 100vw;
     height: 100vh;
-    justify-content: center;
-    align-items: center;
+
+    overflow-y: hidden;
+
+    background-image: linear-gradient(to top, white , aquamarine);
 
 }
 
@@ -313,5 +313,11 @@ Login
 
         width: 300px;
         margin: 10px;
+    }
+
+    .colored-container {
+    
+        background-image: linear-gradient(to top, white , white);
+    
     }
 }

@@ -6,6 +6,7 @@ import style from './style.css';
 import Header from '../components/Header/index';
 import Footer from '../components/Footer/index';
 
+import { network } from '../config/network';
 
 const SeusDownloads = () => {  
   
@@ -18,7 +19,7 @@ const SeusDownloads = () => {
         const token = localStorage.getItem('@token');
 
         try {
-            await fetch('http://192.168.15.152:8080/seus-downloads-usuario', {
+            await fetch(network.api + '/seus-downloads-usuario', {
                 method: 'get',
                 headers: {
                     'Accept': 'application/json',
@@ -105,10 +106,10 @@ const SeusDownloads = () => {
                     
                         <div className='item'> 
                         <div className='capa'>
-                            <img src={"http://192.168.15.152:8080/" + fixUrl( livroBaixado.nome_arquivo)} onError={(e) => e.target.src="./icon-book.png"} />
+                            <img src={network.api + '/' + fixUrl( livroBaixado.nome_arquivo)} onError={(e) => e.target.src="./icon-book.png"} />
                         </div>
                         <div className='download-info'>
-                            <Link onClick={(e) => {downloadEbook('http://192.168.15.152:8080/usuario-download', livroBaixado.nome_arquivo)}}>{ livroBaixado.nome_arquivo}</Link> <br/>
+                            <Link onClick={(e) => {downloadEbook(network.api + '/usuario-download', livroBaixado.nome_arquivo)}}>{ livroBaixado.nome_arquivo}</Link> <br/>
                             <a>{ new Date(livroBaixado.horario).getDay() + "/" + new Date(livroBaixado.horario).getMonth() + "/" + new Date(livroBaixado.horario).getFullYear()}</a> <br/>
                             <a>{ new Date(livroBaixado.horario).getHours() + ':' + new Date(livroBaixado.horario).getMinutes()}</a>
                         </div> 

@@ -7,6 +7,8 @@ import style from './style.css';
 
 import Header from '../components/Header/index';
 
+import { network } from '../config/network';
+
 const Login = () => {
 
     const history = useHistory();
@@ -32,7 +34,7 @@ const Login = () => {
                 
                 //request api
                 try{
-                    await fetch('http://192.168.15.152:8080/login-usuario', {
+                    await fetch(network.api + '/login-usuario', {
                         method: 'post',
                         headers: {
                             'Accept': 'application/json',
@@ -73,8 +75,8 @@ const Login = () => {
     }
 
     return (
-        <div>
-            <Header noSearchBar={true} />
+        <div className='colored-container'>
+            {/*}<Header noSearchBar={true} />{*/} 
 
             <form onSubmit={(e) => handleLogin(e)} className='login-container'>
                 <div className='login-div'>
