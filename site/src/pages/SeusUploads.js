@@ -6,6 +6,7 @@ import style from './style.css';
 import Header from '../components/Header/index';
 import Footer from '../components/Footer/index';
 
+import { network } from '../config/network';
 
 const SeusUploads = () => {  
   
@@ -17,7 +18,7 @@ const SeusUploads = () => {
 
     const carregarListaUploads = async () => {
         try {
-            await fetch('http://192.168.15.152:8080/seus-uploads-usuario', {
+            await fetch(network.api + '/seus-uploads-usuario', {
                 method: 'get',
                 headers: {
                     'Accept': 'application/json',
@@ -104,10 +105,10 @@ const SeusUploads = () => {
                     
                         <div className='item'> 
                         <div className='capa'>
-                            <img src={"http://192.168.15.152:8080/" + fixUrl( livroPublicado.nome_arquivo)} onError={(e) => e.target.src="./icon-book.png"} />
+                            <img src={network.api + '/' + fixUrl( livroPublicado.nome_arquivo)} onError={(e) => e.target.src="./icon-book.png"} />
                         </div>
                         <div className='download-info'>
-                            <Link onClick={(e) => {downloadEbook('http://192.168.15.152:8080/usuario-download', livroPublicado.nome_arquivo)}}>{ livroPublicado.nome_arquivo}</Link> <br/>
+                            <Link onClick={(e) => {downloadEbook(network.api + '/usuario-download', livroPublicado.nome_arquivo)}}>{ livroPublicado.nome_arquivo}</Link> <br/>
                             <a>{livroPublicado.createdAt}</a> <br/>
                         </div> 
                     </div>

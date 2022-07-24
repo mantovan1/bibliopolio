@@ -6,6 +6,7 @@ import style from './style.css';
 import Header from '../components/Header/index';
 import Footer from '../components/Footer/index';
 
+import { network } from '../config/network';
 
 const Home = () => {  
   
@@ -19,7 +20,7 @@ const Home = () => {
 
     const carregarLivros = async () => {
         try {
-            await fetch('http://192.168.15.152:8080/listar-livros', {
+            await fetch(network.api + '/listar-livros', {
                 method: 'get',
                 headers: {
                     'Accept': 'application/json',
@@ -41,7 +42,7 @@ const Home = () => {
 
     const buscarLivros = async () => {
         try {
-            await fetch('http://192.168.15.152:8080/buscar-livros/' + pesquisa, {
+            await fetch(network.api + '/buscar-livros/' + pesquisa, {
                 method: 'get',
                 headers: {
                     'Accept': 'application/json',
@@ -99,6 +100,14 @@ const Home = () => {
 
     useEffect( () => {
 
+        if(usuario) {
+            setMensagemInicial("Seja bem-vindo " + usuario.nick)
+        }
+
+    }, usuario)
+    
+    useEffect( () => {
+
         if (livros === null) {
             carregarLivros();
         }
@@ -112,7 +121,7 @@ const Home = () => {
         }
 
     }, [])
-    
+
     const ListaLivros = () => {
 
         const fixUrl = (str) => {
@@ -130,20 +139,20 @@ const Home = () => {
                 {livros && livros.map( (livro) =>
                     <div className='item'> 
                         <div className='capa'>
-                            <img src={"http://192.168.15.152:8080/" + fixUrl(livro.nome_arquivo)} onError={(e) => e.target.src="./icon-book.png"} />
+                            <img src={network.api + '/' + fixUrl(livro.nome_arquivo)} onError={(e) => e.target.src="./icon-book.png"} />
                         </div>
                         <div className='info'>
                             <a>{livro.nome_livro}</a> <br/>
                             <a>{livro.nome_autor}</a> <br/>
 
                             {usuario && 
-                            <div className='btn_download' onClick={(e) => {e.preventDefault(); downloadEbook('http://192.168.15.152:8080/usuario-download', livro.nome_arquivo);}}> 
+                            <div className='btn_download' onClick={(e) => {e.preventDefault(); downloadEbook(network.api + '/usuario-download', livro.nome_arquivo);}}> 
                                 <a>Baixar pdf</a>
                             </div>
                             }
 
                             {!usuario &&
-                                <div onClick={(e) => {e.preventDefault(); window.location.assign('http://192.168.15.152:8080/download/' + livro.nome_arquivo, "_blank");}} className='btn_download'>Baixar pdf</div>
+                                <div onClick={(e) => {e.preventDefault(); window.location.assign(network.api + '/download/' + livro.nome_arquivo, "_blank");}} className='btn_download'>Baixar pdf</div>
                             }
 
                         </div> 

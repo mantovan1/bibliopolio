@@ -7,6 +7,8 @@ import style from './style.css';
 
 import Header from '../components/Header/index';
 
+import { network } from '../config/network';
+
 //var sha256 = require('js-sha256');
 
 const Cadastro = () => {
@@ -33,7 +35,7 @@ const Cadastro = () => {
                     //window.alert(process.env.KEY);
 
                     try{
-                        await fetch('http://192.168.15.152:8080/cadastro-usuario', {
+                        await fetch(network.api + '/cadastro-usuario', {
                             method: 'post',
                             headers: {
                                 'Accept': 'application/json',
@@ -89,8 +91,8 @@ const Cadastro = () => {
     }, [senha]);
 
     return (
-        <div>
-            <Header noSearchBar={true} />
+        <div className='colored-container'>
+            {/*}<Header noSearchBar={true} />{*/} 
 
             <form onSubmit={(e) => handleLogin(e)} className='login-container'>
                 <div className='login-div'>

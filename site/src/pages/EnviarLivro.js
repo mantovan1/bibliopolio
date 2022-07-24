@@ -7,6 +7,8 @@ import style from './style.css';
 
 import Header from '../components/Header/index';
 
+import { network } from '../config/network';
+
 const EnviarLivro = () => {
 
     const history = useHistory();
@@ -39,7 +41,7 @@ const EnviarLivro = () => {
             const token = await localStorage.getItem('@token')
 
             try{
-                await fetch('http://192.168.15.152:8080/cadastro-livro', {
+                await fetch(network.api + '/cadastro-livro', {
                     method: 'post',
                     headers: {
                         'x-access-token': token 
@@ -78,9 +80,9 @@ const EnviarLivro = () => {
         )
     } else {
         return (
-            <div>
+            <div className='colored-container'>
     
-                <Header noSearchBar={true} /> 
+                {/*}<Header noSearchBar={true} />{*/} 
     
                 <form onSubmit={(e) => handleLogin(e)} className='login-container'>
                     <div className='login-div'>
