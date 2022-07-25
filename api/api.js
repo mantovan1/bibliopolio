@@ -64,6 +64,9 @@ app.use(cors());
 
 app.get('/download/:nome_arquivo', async (req, res) => {
 
+	res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Methods", 'GET');
+
 	const livro = await Livro.findOne({ attributes: ['id'] , where: {nome_arquivo: req.params.nome_arquivo} });
 	
 	const filePath = './uploads/' + req.params.nome_arquivo;
@@ -86,9 +89,10 @@ app.get('/download/:nome_arquivo', async (req, res) => {
 
 app.post('/usuario-download', verificarTokenUsuario, async (req, res) => {
 
-	const nome_arquivo = req.body.nome_arquivo;
+	res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Methods", 'POST');
 
-	console.log(nome_arquivo);
+	const nome_arquivo = req.body.nome_arquivo;
 
         const livro = await Livro.findOne({ attributes: ['id', 'nome_arquivo'] , where: {nome_arquivo: nome_arquivo} });
 
@@ -129,6 +133,10 @@ app.post('/usuario-download', verificarTokenUsuario, async (req, res) => {
 //usuário
 
 app.post('/cadastro-usuario', async (req, res) => {
+	
+	res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Methods", 'POST');
+	
 	const nick = req.body.nick;
 	const email = req.body.email;
 	const senha = req.body.senha;
@@ -159,6 +167,9 @@ app.post('/cadastro-usuario', async (req, res) => {
 });
 
 app.post('/login-usuario', async (req, res) => {
+
+	res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Methods", 'POST');
 
 	try {
                 const email = req.body.email;
@@ -193,6 +204,9 @@ app.post('/login-usuario', async (req, res) => {
 
 app.get('/seus-downloads-usuario', verificarTokenUsuario, async (req, res) => {
 
+	res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Methods", 'GET');
+
 	let rawdata = fs.readFileSync('./downloads_list/f.json');
 	let obj = JSON.parse(rawdata);
 
@@ -215,7 +229,6 @@ app.get('/seus-downloads-usuario', verificarTokenUsuario, async (req, res) => {
 app.get('/seus-uploads-usuario', verificarTokenUsuario ,async (req, res) => {
 
         res.header("Access-Control-Allow-Origin", "*");
-        
         res.header("Access-Control-Allow-Methods", 'GET');
 
         const livros = await Livro.findAll({attributes: ['usuarioId', 'nome_livro', 'nome_autor', 'genero_livro', 'idioma_livro', 'nome_arquivo', 'createdAt'], where: {usuarioId: req.usuario_id} });
@@ -227,6 +240,9 @@ app.get('/seus-uploads-usuario', verificarTokenUsuario ,async (req, res) => {
 //livro
 
 app.post('/cadastro-livro', upload.single('arquivo'), verificarTokenUsuario, async (req, res) => {
+	
+	res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Methods", 'POST');
 	
 	const { filename, size } = req.file;
 
@@ -261,7 +277,6 @@ app.post('/cadastro-livro', upload.single('arquivo'), verificarTokenUsuario, asy
 app.get('/listar-livros', async (req, res) => {
 
 	res.header("Access-Control-Allow-Origin", "*");
-	
     	res.header("Access-Control-Allow-Methods", 'GET');
 
 	const livros = await Livro.findAll({attributes: ['usuarioId', 'nome_livro', 'nome_autor', 'genero_livro', 'idioma_livro', 'nome_arquivo'] });
@@ -273,7 +288,6 @@ app.get('/listar-livros', async (req, res) => {
 app.get('/buscar-livros/:pesquisa', async (req, res) => {
 
         res.header("Access-Control-Allow-Origin", "*");
-        
         res.header("Access-Control-Allow-Methods", 'GET');
 
 	const pesquisa = req.params.pesquisa;
@@ -287,8 +301,7 @@ app.get('/buscar-livros/:pesquisa', async (req, res) => {
 app.post('/livros', async (req, res) => {
 
         res.header("Access-Control-Allow-Origin", "*");
-        
-        res.header("Access-Control-Allow-Methods", 'GET');
+        res.header("Access-Control-Allow-Methods", 'POST');
 
 	const listaLivrosId = req.body.listaLivrosId;
 
