@@ -8,7 +8,7 @@ Aqui a tela inicial, onde aparece uma lista dos e-book's que foram publicados at
 
 Você pode pesquisar por um e-book específico na barra de busca. A pesquisa é feita com base no título dos livros e no nome dos autores.
 
-<img src="./online-library-images/inicio-01.png" />
+<img src="./online-library-images/desktop/inicio-01.png" />
 
 Aqui a tela onde é feito um cadastro de um pdf.
 
