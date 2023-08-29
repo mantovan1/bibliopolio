@@ -1,109 +1,52 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useHistory } from "react-router-dom";
-
 import validator from 'validator'
-
-import style from './style.css';
-
-import Header from '../components/Header/index';
-
-import { network } from '../config/network';
+import { ContainerLogin, FormLogin, Head, ButtonLogin, Terms, Label, InputLogin } from './style.js';
+import userService from '../services/user.js';
 
 const Login = () => {
-
     const history = useHistory();
-
     const [email, setEmail] = useState("");
-    const [senha, setSenha] = useState("");
-
-    const [errorMessage, setErrorMessage] = useState(null);
-
-    useEffect(async() => {
-        if(await localStorage.getItem('@token') != null) {
-            history.push('/enviar-livro');
-        }
-        
-    }, [])
+    const [pass, setPass] = useState("");
 
     const handleLogin = async (e) => {
-
         e.preventDefault();
-
-        if(!validator.isEmpty(email) && !validator.isEmpty(senha)) {
+        console.log(email);
+        console.log(pass);
+        if(!validator.isEmpty(email) && !validator.isEmpty(pass)) {
             if(validator.isEmail(email)) {
-                
-                //request api
-                try{
-                    await fetch(network.api + '/login-usuario', {
-                        method: 'post',
-                        headers: {
-                            'Accept': 'application/json',
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            email: email,
-                            senha:  senha
-                        })
-                    })
-                    .then(response => response.json())
-                    .then(async data => {
-                        try {
-                            if(data.auth == true) {
-                                await localStorage.setItem('@token', data.token);
-                                await localStorage.setItem('@usuario', JSON.stringify(data.result));
-                                history.push({ pathname: '/' });
-                            }
-                        } catch (e) {
-                            // saving error
-                        }
-                    })
-        
-                }catch(err){
-                    //
+                const response = await userService.login(email, pass);
+                console.log(response);
+                if(response?.auth) {
+                    history.push('/');
                 }
-
             } else {
-                setErrorMessage("*Email inválido! \n");
             }
         } else {
-            setErrorMessage("*Preencha todos os campos! \n");
         }
-    
-        console.log(email);
-        console.log(senha);
-    
     }
 
     return (
-        <div className='colored-container'>
-            {/*}<Header noSearchBar={true} />{*/} 
+        <ContainerLogin>
+            <FormLogin>
+                <Head> Fazer Login </Head>
+                <Label>Email</Label>
+                <InputLogin onChange={(e) => {
+                    setEmail(e.target.value);
+                }} type={"text"} />
+                <Label>Senha</Label>
+                <InputLogin onChange={(e) => setPass(e.target.value)} type={"password"} />
+                <ButtonLogin onClick={(e) => {
+                    handleLogin(e);
+                }}> Fazer login </ButtonLogin>
 
-            <form onSubmit={(e) => handleLogin(e)} className='login-container'>
-                <div className='login-div'>
-                    <div className='top'>
-                        <h1>Login</h1>
-                        <a className='error-msg'>{errorMessage}</a>
-                    </div>
-                    
-                    <div>
-                        <div>
-                            <a>Email</a> <br />
-                            <input onChange={(e) => setEmail(e.target.value)} type={"text"} />
-                        </div>
-
-                        <div>
-                            <a>Senha</a> <br />
-                            <input onChange={(e) => setSenha(e.target.value)} type={"password"} /> <br />
-                        </div>
-                    </div>
-
-                    <button type='submit'> Próximo </button>
-                    
-                    <Link to="/cadastro">ainda não possui uma conta?</Link>
-                </div>
-            </form>
-
-        </div>
+                <Terms>
+                Ao continuar, você concorda com as Condições de Uso da Amazon. Por favor verifique a Notificação de Privacidade, Notificação de Cookies e a Notificação de Anúncios Baseados em Interesse.
+                </Terms>
+                
+                <Link to="/register">ainda não possui uma conta?</Link>
+            </FormLogin>
+        </ContainerLogin>
     );
 }
 

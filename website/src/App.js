@@ -1,27 +1,32 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { Route, Switch, useLocation } from 'react-router-dom';
+import AboutBook from './pages/AboutBook';
+import Register from './pages/Register';
+import Home from './pages/Home';
+import Login from './pages/Login';
+import SendBook from './pages/SendBook.js';
+import Contact from './pages/Contact';
+import YourUploads from './pages/YourUploads.js';
+import Donations from './pages/Donations.js';
+import SaveUser from './pages/SaveUser';
 
-import { Route, Switch } from "react-router-dom";
-
-import Cadastro from './pages/Cadastro';
-import Home from "./pages/Home";
-import Login from "./pages/Login";
-import Sobre from "./pages/Sobre";
-import EnviarLivro from './pages/EnviarLivro';
-import SeusDownloads from './pages/SeusDownloads';
-import SeusUploads from './pages/SeusUploads';
+import 'react-toastify/dist/ReactToastify.css';
+import './index.css';
 
 export default function App() {
+
   return (
-    //<Router>
-      <Switch>
-        <Route component = { Home }  path="/" exact />
-        <Route component = { Login }  path="/login" />
-        <Route component = { Cadastro }  path="/cadastro" />
-        <Route component = { Sobre }  path="/sobre" />
-        <Route component= {EnviarLivro} path="/enviar-livro" />
-        <Route component= {SeusDownloads} path="/seus-downloads" />
-        <Route component={SeusUploads} path={"/seus-uploads"} />
-      </Switch>
-    //</Router>
+    <Switch>
+      <Route component={AboutBook} path="/book" />
+      <Route component={Donations} path="/donations" />
+      <Route component={Login} path="/login" />
+      <Route component={Register} path="/register" />
+      <Route component={Contact} path="/contact" />
+      <Route component={SendBook} key={3} path="/sendbook" />
+      <Route component={YourUploads} path="/uploads" />
+      <Route component={SaveUser} path="/saveuser/:token" />
+      <Route path="/:term" key={2} component={Home} />
+      <Route path="/" key={1} component={Home} />
+    </Switch>
   );
 }
