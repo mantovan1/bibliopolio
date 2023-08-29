@@ -10,7 +10,6 @@ const BookRepository = require('../repositories/BookRepository.js');
 
 router.post('/signup', async (req, res) => {
         try {
-                console.log('acionado');
                 res.header("Access-Control-Allow-Origin", "*");
                 res.header("Access-Control-Allow-Methods", 'POST');
                 const name = req.body.name;
@@ -21,7 +20,6 @@ router.post('/signup', async (req, res) => {
                         email: email,
                         pass: pass
                 };
-                console.log(user);
                 const token = jwt.sign({user}, process.env.TOKEN_SECRET, {
                         expiresIn: '180d',
                 });
@@ -37,28 +35,26 @@ router.post('/signup', async (req, res) => {
                 if(error){
                         res.send("error");
                 }else{
-                        console.log('deu certo')
                         return res.status(200).send("sent");
                 }
                 });
         } catch(err) {
-                console.log(err);
                 return res.status(500).send(err);
         }
 });
 
 router.get('/createaccount/:token', verifyUserToken, async(req, res) => {
         try {
-                const user = req.user;
-                const createdUser = await UserRepository.createUser(
+                let user = req.user;
+                const result = await UserRepository.createUser(
                         user.name,
                         user.email,
                         user.pass
                 );
-                if(createdUser) {
-                        delete createdUser['pass'];
-                        console.log(createdUser);
-                        const token = jwt.sign({createdUser}, process.env.TOKEN_SECRET, {
+                user = result?.dataValues;
+                if(user) {
+                        delete user['pass'];
+                        const token = jwt.sign({ user }, process.env.TOKEN_SECRET, {
                                 expiresIn: '180d',
                         });
                         return res.status(200).redirect(`http://192.168.15.152:3000/saveuser/${token}`);
@@ -88,11 +84,9 @@ router.post('/login', async (req, res) => {
                                 delete result.dataValues['pass'];
                 		res.json({auth: true, token: token, result: result.dataValues});
                         } else {
-                                console.log("email/pass errados!");
                                 res.json({auth: false, message: 'Nome/pass errados!'});
                         }
                 } else {
-                        console.log("Usuário não existe");
                         res.json({auth: false, message: 'Usuário não existe'});
                 }
         } catch (e) {

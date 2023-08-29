@@ -41,8 +41,6 @@ async function fromPDF(file) {
             path: newPath // Update the path with the new path
         };
 
-        console.log(updatedResolve);
-
         return updatedResolve;
     } catch (error) {
         console.error("Error converting page to image:", error);

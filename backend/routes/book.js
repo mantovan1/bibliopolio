@@ -114,7 +114,6 @@ router.post('/upload', upload.single('file'), verifyUserToken, async (req, res) 
         } else  {
             throw new Error('Invalid file format');
         }
-        console.log(image);
         await uploadFile(image);
         await uploadFile(file);
 
@@ -126,7 +125,6 @@ router.post('/upload', upload.single('file'), verifyUserToken, async (req, res) 
             userId,
             desc
         );
-        console.log(result);
         if(result) {
             return res.status(200).json({uploaded: result});
         } else {
