@@ -1,34 +1,36 @@
 const db = require('../db')
 
-const Livro = db.sequelize.define('livros', {
+const Book = db.sequelize.define('books', {
         id: {
                 type: db.Sequelize.INTEGER,
                 allowNull: false,
                 autoIncrement: true,
                 primaryKey: true
         },
-        nome_livro: {
+        title: {
                 type: db.Sequelize.STRING,
                 allowNull: false
         },
-        nome_autor: {
+        author_name: {
                 type: db.Sequelize.STRING,
                 allowNull: false
         },
-	genero_livro: {
+	genre: {
                 type: db.Sequelize.STRING,
                 allowNull: false
         },
-        idioma_livro: {
-                type: db.Sequelize.STRING,
-                allowNull: false
-        },
-	nome_arquivo: {
+	filename: {
 		type: db.Sequelize.STRING,
 		allowNull: false
-	}
-})
+	},
+        userId: {
+                type: db.Sequelize.INTEGER,
+                allowNull: false
+        },
+        desc: {
+                type: db.Sequelize.STRING,
+                allowNull: true
+        }
+});
 
-//db.sequelize.sync({force: true})
-
-module.exports = Livro;
+module.exports = Book;
