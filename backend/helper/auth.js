@@ -2,8 +2,8 @@ const jwt = require('jsonwebtoken');
 
 require('dotenv').config()
 
-const verificarTokenUsuario = (req, res, next) => {
-        const token = req.headers['x-access-token'];
+const verifyUserToken = (req, res, next) => {
+        const token = req.headers['x-access-token']?req.headers['x-access-token']:req.params.token;
 
         if(!token) {
                 res.send('Yo, Precisamos do token de autentificação!')
@@ -12,11 +12,11 @@ const verificarTokenUsuario = (req, res, next) => {
                         if(err) {
                                 res.json({auth: false, message: 'Falha ao autentificar-se!'});
                         } else {
-                                req.usuario_id = decoded.id;
+                                req.user = decoded.user;
                                 next();
                         }
                 });
         }
 }
 
-module.exports = verificarTokenUsuario;                                                                  
+module.exports = verifyUserToken;                                                                  
