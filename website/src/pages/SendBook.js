@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useHistory } from "react-router-dom";
 import Header from '../components/Header/index.js';
 import Subheader from '../components/Subheader/index.js';
-import { SendBookPage, TopMessage, UploadFile, SaveBook, SaveBookButton, BookInfoUpload, InputBookTitle, InputBookAuthor, BookGenreArea, BookGenreOption, GenreOption, GenreSelected, SelectedGenres, BookDescInput } from './style.js'
+import { SendBookPage, TopMessage, UploadFile, SaveBook, SaveBookButton, BookInfoUpload, InputBookTitle, InputBookAuthor, BookGenreArea, BookGenreOption, GenreOption, GenreSelected, SelectedGenres, BookDescInput } from '../styles/sendBook.js';
 import bookService from '../services/book.js'
 import { ToastContainer, toast } from 'react-toastify';
 
@@ -31,7 +31,7 @@ const SendBook = () => {
 
         const token = localStorage.getItem('@token');
         if(!token) {
-            toast.error('É preciso ter uma conta para adicionar um livro aos seus favoritos', {
+            toast.error('É preciso ter uma conta para adicionar um livro a plataforma', {
                 position: "top-center",
                 autoClose: 1000,
                 hideProgressBar: true,
@@ -60,6 +60,7 @@ const SendBook = () => {
                 console.log(formData);
 
                 const response = await bookService.uploadBook(formData);
+                
                 toast.success(response, {
                     position: "top-center",
                     autoClose: 1000,
@@ -111,9 +112,8 @@ const SendBook = () => {
                 <TopMessage>
                 {`
                     Quer ajudar compartilhando um livro? perfeito :)
-                    Os livros devem estar em formato ePub, no momento só vamos aceitar formato ePub, em breve aceitaremos outros formatos como pdf e mobi.
-                    Importante que o arquivo já esteja com o DRM removido, se você não sabe fazer isso, veja este tutorial no youtube.
-                    Pedimos também que não postem livros que já estão cadastrados no site, utilize a ferramenta de busca e nos ajude a poupar um pouco de trabalho :)`
+                    Os livros devem estar em formato ePub ou pdf.
+                    Pedimos que não postem livros que já estão cadastrados no site, utilize a ferramenta de busca e nos ajude a poupar um pouco de trabalho :)`
                 }
                 </TopMessage>
                 <UploadFile type='file' onChange={

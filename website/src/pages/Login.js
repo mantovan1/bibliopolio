@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useHistory } from "react-router-dom";
 import validator from 'validator'
-import { ContainerLogin, FormLogin, Head, ButtonLogin, Terms, Label, InputLogin } from './style.js';
+import { ContainerLogin, FormLogin, Head, ButtonLogin, Terms, Label, InputLogin } from '../styles/login.js';
 import userService from '../services/user.js';
 
 const Login = () => {

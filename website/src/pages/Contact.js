@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Header from "../components/Header/index.js";
 import Subheader from "../components/Subheader/index.js";
-import { ContactPage, ContactInfo, EmailSubject, EmailBody, ButtonArea, ButtonSendEmail } from "./style.js";
+import { ContactPage, ContactInfo, EmailSubject, EmailBody, ButtonArea, ButtonSendEmail, LabelSubject, LabelBody } from "../styles/contact.js";
 
 import axios from 'axios';
 
@@ -36,11 +36,11 @@ export default function Contact() {
             <Subheader />
             <ContactPage>
                 <ContactInfo>
-                Entre em contato pelo email: elivroslove@protonmail.com
+                Mande um email para nós:
                 </ContactInfo>
-                <a>Título</a>
+                <LabelSubject>Título</LabelSubject>
                 <EmailSubject onChange={handleTitleChange} />
-                <a>Corpo do email</a>
+                <LabelBody>Corpo do email</LabelBody>
                 <EmailBody onChange={handleParagraphChange} />
                 <ButtonArea>
                     <ButtonSendEmail onClick={sendEmail}>Enviar email</ButtonSendEmail>

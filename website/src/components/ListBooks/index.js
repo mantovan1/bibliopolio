@@ -51,7 +51,7 @@ export default function App(props) {
                         <AuthorName>{book.author_name}</AuthorName> <br/>
                     </Info> 
                     <ButtonDownload onClick={() => {downloadBook(book)}}> 
-                        <a>Baixar pdf</a>
+                        <a>Baixar</a>
                     </ButtonDownload>
                 </Item>
             )}
