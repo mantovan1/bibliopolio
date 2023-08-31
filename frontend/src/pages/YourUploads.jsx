@@ -1,12 +1,12 @@
 import React, { useEffect , useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import Header from '../components/Header/index.js';
-import Subheader from '../components/Subheader/index.js';
+import Header from '../components/Header/index.jsx';
+import Subheader from '../components/Subheader/index.jsx';
 
-import ListBooks from '../components/ListBooks/index.js';
+import ListBooks from '../components/ListBooks/index.jsx';
 
-import { network } from '../config/network';
+import { network } from '../config/network.js';
 
 const SeusUploads = () => {  
   

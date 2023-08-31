@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom/cjs/react-router-dom.min';
-import Search from '../Search/index.js'
+import Search from '../Search/index.jsx'
 
 import { Header, Logo, More } from './style.js'
 

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Header from "../components/Header/index.js";
-import Subheader from "../components/Subheader/index.js";
+import Header from "../components/Header/index.jsx";
+import Subheader from "../components/Subheader/index.jsx";
 import { ContactPage, ContactInfo, EmailSubject, EmailBody, ButtonArea, ButtonSendEmail, LabelSubject, LabelBody } from "../styles/contact.js";
 
 import axios from 'axios';

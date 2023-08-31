@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useHistory } from "react-router-dom";
-import Header from '../components/Header/index.js';
-import Subheader from '../components/Subheader/index.js';
+import Header from '../components/Header/index.jsx';
+import Subheader from '../components/Subheader/index.jsx';
 import { SendBookPage, TopMessage, UploadFile, SaveBook, SaveBookButton, BookInfoUpload, InputBookTitle, InputBookAuthor, BookGenreArea, BookGenreOption, GenreOption, GenreSelected, SelectedGenres, BookDescInput } from '../styles/sendBook.js';
 import bookService from '../services/book.js'
 import { ToastContainer, toast } from 'react-toastify';

@@ -4,10 +4,10 @@ import AboutBook from './pages/AboutBook';
 import Register from './pages/Register';
 import Home from './pages/Home';
 import Login from './pages/Login';
-import SendBook from './pages/SendBook.js';
+import SendBook from './pages/SendBook.jsx';
 import Contact from './pages/Contact';
-import YourUploads from './pages/YourUploads.js';
-import Donations from './pages/Donations.js';
+import YourUploads from './pages/YourUploads.jsx';
+import Donations from './pages/Donations.jsx';
 import SaveUser from './pages/SaveUser';
 
 import 'react-toastify/dist/ReactToastify.css';

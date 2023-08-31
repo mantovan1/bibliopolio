@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
-import Header from '../components/Header/index.js';
-import Subheader from '../components/Subheader/index.js';
-import CommentSection from "../components/CommentSection/index.js";
+import Header from '../components/Header/index.jsx';
+import Subheader from '../components/Subheader/index.jsx';
+import CommentSection from "../components/CommentSection/index.jsx";
 import { ContainerBookInfo, ContentBook, BookCover, ButtonDownloadLarge, RightSide, TitleBook, AuthorBook, Desc, ButtonFav, FavDiv } from "../styles/aboutbook.js";
 import { ToastContainer, toast } from 'react-toastify';
 import { useLocation } from "react-router-dom";

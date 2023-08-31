@@ -1,6 +1,6 @@
 import React from "react";
-import Header from '../components/Header/index.js';
-import Subheader from '../components/Subheader/index.js';
+import Header from '../components/Header/index.jsx';
+import Subheader from '../components/Subheader/index.jsx';
 import { DonationsPage, DonationInfo } from "../styles/donations.js";
 
 export default function App() {
