@@ -6,7 +6,7 @@ const verifyUserToken = (req, res, next) => {
         const token = req.headers['x-access-token']?req.headers['x-access-token']:req.params.token;
 
         if(!token) {
-                res.send('Yo, Precisamos do token de autentificação!')
+                res.status(401).send('Yo, Precisamos do token de autentificação!')
         } else {
                 jwt.verify(token, process.env.TOKEN_SECRET, (err, decoded) => {
                         if(err) {

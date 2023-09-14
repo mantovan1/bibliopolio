@@ -35,7 +35,7 @@ router.post('/signup', async (req, res) => {
                 if(error){
                         res.send("error");
                 }else{
-                        return res.status(200).send("sent");
+                        return res.status(200).json({message: 'Enviamos um Email para confirmação da su conta'});
                 }
                 });
         } catch(err) {
@@ -93,18 +93,5 @@ router.post('/login', async (req, res) => {
                 res.status(404);
         }
 });
-
-/*
-
-router.get('/youruploads', verifyUserToken ,async (req, res) => {
-        try {
-                const userId = req.params.userId;
-                const books = await BookRepository.findByColumn('userId', userId);
-                return res.status(200).json({books: books});
-        } catch(err) {
-                return res.status(500).send(err);
-        }
-});
-*/
 
 module.exports = router;
