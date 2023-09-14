@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { CommentSection, CommentsHead, CommentariesList, Comment, CommentUser, CommentText } from "./style"
+import { CommentSection, CommentsHead, CommentariesList, Comment, CommentUser, CommentText, NewComment } from "./style"
 
 export default function Component() {
     const [commentaries, setCommentaries] = useState([
@@ -14,7 +14,9 @@ export default function Component() {
             <CommentsHead onClick={() => {console.log(commentaries)}}>
                 Comentários
             </CommentsHead>
-
+	    <NewComment>
+	        teste
+	    </NewComment>
             <CommentariesList>
             {commentaries && commentaries.map((comment) => (
                 <Comment key={comment.id}>

@@ -1,9 +1,9 @@
 import axios from "axios"
-import { network } from "../config/network"
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 async function add(bookId) {
     try {
-        const url = `${network.api}/favorite/${bookId}`;
+        const url = `${backendUrl}/favorite/${bookId}`;
         const token = localStorage.getItem('@token')
         const config = {
             method: 'get',
@@ -24,7 +24,7 @@ async function add(bookId) {
 
 async function remove(bookId) {
     try {
-        const url = `${network.api}/favorite/remove/${bookId}`;
+        const url = `${backendUrl}/favorite/remove/${bookId}`;
         const token = localStorage.getItem('@token')
         const config = {
             method: 'get',
@@ -45,7 +45,7 @@ async function remove(bookId) {
 
 async function getListFavorites() {
     try {
-        const url = `${network.api}/favorite`;
+        const url = `${backendUrl}/favorite`;
         const token = localStorage.getItem('@token')
         const config = {
             method: 'get',
@@ -66,7 +66,7 @@ async function getListFavorites() {
 
 async function check(bookId) {
     try {
-        const url = `${network.api}/favorite/check/${bookId}`;
+        const url = `${backendUrl}/favorite/check/${bookId}`;
         const token = localStorage.getItem('@token');
         const config = {
             method: 'get',

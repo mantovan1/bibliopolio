@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import axios from "axios";
-import { network } from "../config/network";
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 export default function SaveUser() {
     
@@ -17,7 +17,7 @@ export default function SaveUser() {
             }
         };
       
-        const apiUrl = network.api+'/user/yourinfo';    
+        const apiUrl = `${backendUrl}/user/yourinfo`;    
         axios.get(apiUrl, config)
         .then(response => {
             localStorage.setItem('@user', JSON.stringify(response.data));

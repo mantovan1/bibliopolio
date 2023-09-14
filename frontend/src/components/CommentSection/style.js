@@ -18,6 +18,12 @@ const CommentariesList = styled.div`
     width: 100%;
 `;
 
+const NewComment = styled.input`
+	width: 100%;
+
+	border: 1px solid lightgray;
+`
+
 const Comment = styled.div`
     display: flex;
     flex-direction: column;
@@ -38,4 +44,4 @@ const CommentText = styled.a`
     font-size: 14px;
 `;
 
-export { CommentSection, CommentsHead, CommentariesList, Comment, CommentUser, CommentText }
+export { CommentSection, CommentsHead, CommentariesList, NewComment, Comment, CommentUser, CommentText }

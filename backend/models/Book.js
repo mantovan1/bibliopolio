@@ -30,7 +30,11 @@ const Book = db.sequelize.define('books', {
         desc: {
                 type: db.Sequelize.STRING,
                 allowNull: true
-        }
+        },
+	format: {
+		type: db.Sequelize.STRING(3),
+		allowNull: true
+	}
 });
 
 module.exports = Book;

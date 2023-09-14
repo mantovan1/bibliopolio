@@ -1,9 +1,11 @@
-import { network } from "../config/network";
 import axios from 'axios';
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 async function listBooks() {
+    console.log(backendUrl);
+    console.log('teste');
     try {
-        const response = await axios.get(`${network.api}/book/list`);
+        const response = await axios.get(`${backendUrl}/book/list`);
         const data = await response.data;
         return data;
     } catch(error) {
@@ -13,7 +15,7 @@ async function listBooks() {
 
 async function search(term) {
     try {
-        const url = `${network.api}/book/search`;
+        const url = `${backendUrl}/book/search`;
         const response = await axios.get(`${url}/${term}`);
         const data = await response.data;
         return data;
@@ -24,7 +26,7 @@ async function search(term) {
 
 async function uploadBook(form) {
     try {
-        const url = `${network.api}/book/upload`;
+        const url = `${backendUrl}/book/upload`;
         const token = localStorage.getItem('@token');
         const config = {
             method: 'post',
@@ -45,8 +47,25 @@ async function uploadBook(form) {
     }
 }
 
+async function download(format, bookId, title) {
+    const downloadUrl = `${backendUrl}/book/download/${format}/${bookId}`;
+    axios.get(downloadUrl, { responseType: 'blob' })
+    .then(response => {
+        const blobUrl = URL.createObjectURL(response.data);
+        const link = document.createElement('a');
+        link.href = blobUrl;
+        link.download = title;
+        link.click();
+        URL.revokeObjectURL(blobUrl);
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
 export default Object.freeze({
     listBooks,
     search,
-    uploadBook
+    uploadBook,
+    download
 })

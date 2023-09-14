@@ -1,7 +1,7 @@
 const Book = require('../models/Book.js');
 const db = require('../db.js');
 
-async function saveBook(title, author_name, genre, filename, userId, desc=null) {
+async function saveBook(title, author_name, genre, filename, userId, desc=null, format = null) {
     try {
         const bookData = {
             title: title,
@@ -14,6 +14,10 @@ async function saveBook(title, author_name, genre, filename, userId, desc=null) 
         if (desc !== null) {
             bookData.desc = desc;
         }
+
+	if (format !== null) {
+	   bookData.format = format;
+	}
 
         const createdBook = await Book.create(bookData);
 

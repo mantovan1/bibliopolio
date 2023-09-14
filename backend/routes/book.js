@@ -96,6 +96,7 @@ router.post('/upload', upload.single('file'), verifyUserToken, async (req, res) 
         const file = req.file;
         file.originalname = `${v4()}-${file.originalname}`;
         const filename = file.originalname.replace('.pdf', '').replace('.epub', '');
+	const format = file.originalname.slice(-3);
 
         const userId = req.user.id;
         const title = req.body.title;
@@ -123,7 +124,8 @@ router.post('/upload', upload.single('file'), verifyUserToken, async (req, res) 
             genre,
             filename,
             userId,
-            desc
+            desc,
+	    format
         );
         if(result) {
             return res.status(200).json({uploaded: result});

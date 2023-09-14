@@ -1,37 +1,18 @@
 import React, { useState } from "react";
 import { Books, Item, Cover, CoverImg, ButtonDownload, Info, Title, AuthorName } from "./style";
-import { network } from '../../config/network.js';
 import { useHistory } from 'react-router-dom';
-import axios from "axios";
-
+import bookService from "../../services/book";
 export default function App(props) {
 
+    const backendUrl = import.meta.env.VITE_BACKEND_URL;
     const history = useHistory();
 
     const [books, setBooks] = useState(props.books);
     const [user, setUser] = useState();
 
-    const downloadBook = async (book) => {
-
-        const downloadUrl = `${network.api}/book/download/pdf/${book.id}`;
-
-        axios.get(downloadUrl, { responseType: 'blob' })
-        .then(response => {
-            // Create a blob URL from the response data
-            const blobUrl = URL.createObjectURL(response.data);
-
-            // Create a link element
-            const link = document.createElement('a');
-            link.href = blobUrl;
-            link.download = book.filename; // Specify the default download filename
-            link.click();
-
-            // Clean up the blob URL
-            URL.revokeObjectURL(blobUrl);
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
+    const handleDownload = async(e, format, bookId,title) => {
+        e.preventDefault();
+        await bookService.download(format, bookId, title);
     }
 
     return (
@@ -44,13 +25,13 @@ export default function App(props) {
                     }
                 }> 
                     <Cover>
-                        <CoverImg src={`${network.api}/book/cover/${book.id}`} onError={(e) => e.target.src="./icon-book.png"} />
+                        <CoverImg src={`${backendUrl}/book/cover/${book.id}`} onError={(e) => e.target.src="./icon-book.png"} />
                     </Cover>
                     <Info>
                         <Title>{book.title}</Title> <br/>
                         <AuthorName>{book.author_name}</AuthorName> <br/>
                     </Info> 
-                    <ButtonDownload onClick={() => {downloadBook(book)}}> 
+                    <ButtonDownload onClick={(e) => {handleDownload(e, book.format, book.id, book.title)}}> 
                         <a>Baixar</a>
                     </ButtonDownload>
                 </Item>

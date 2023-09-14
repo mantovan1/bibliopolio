@@ -15,10 +15,12 @@ const userRouter = require('./routes/user.js');
 const emailRouter = require('./routes/email.js');
 const bookRouter = require('./routes/book.js');
 const favoriteRouter = require('./routes/favorite.js');
+const commentRouter = require('./routes/comment.js');
 
 app.use('/user', userRouter);
 app.use('/email', emailRouter);
 app.use('/book', bookRouter);
 app.use('/favorite', favoriteRouter);
+app.use('/comment', commentRouter);
 
 module.exports = app;
